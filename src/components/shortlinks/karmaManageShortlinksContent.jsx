@@ -16,6 +16,7 @@ import {
 	AlertDialogCancel,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
+import KarmaButtonLoading from "@/components/loading/karmaButtonLoading";
 
 export default function KarmaManageShortlinksContent({
 	editOpen,
@@ -172,7 +173,7 @@ export default function KarmaManageShortlinksContent({
 								<AlertDialogAction asChild>
 									<Button type="submit">
 										{loading ? (
-											<KarmaLoading className={"w-8 h-8"} />
+											<KarmaButtonLoading className={"w-8 h-8"} />
 										) : (
 											"Update"
 										)}

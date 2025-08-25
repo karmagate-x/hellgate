@@ -8,9 +8,9 @@ import {
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useUser } from "@clerk/nextjs";
-import KarmaLoading from "@/components/karmaLoading";
 import { Button } from "@/components/ui/button";
 import KarmaBackupUrlHelpDialog from "@/components/dialog/karmaBackupUrlHelpDialog";
+import KarmaButtonLoading from "@/components/loading/karmaButtonLoading";
 
 export default function CreateShortlinksTab() {
 	const [form, setForm] = useState({
@@ -133,7 +133,7 @@ export default function CreateShortlinksTab() {
 					disabled={loading}
 				>
 					{loading ? (
-						<KarmaLoading className={"dark:fill-black fill-white w-8 h-8"} />
+						<KarmaButtonLoading className={"dark:fill-black fill-white w-8 h-8"} />
 					) : (
 						"Create Shortlink"
 					)}

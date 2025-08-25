@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { KarmaThemeToggler } from "../ui/KarmaThemToggler";
 import {useEffect} from "react";
+import {Settings2, LayoutDashboardIcon, LogOut} from "lucide-react";
+import * as React from "react";
 
 export default function KarmaUsersAvatar() {
 	const { user, isLoaded } = useUser();
@@ -67,16 +69,21 @@ export default function KarmaUsersAvatar() {
 				</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem asChild>
-					<p variant={"ghost"} onClick={() => openUserProfile()}>
-						Profile Management
+					<p onClick={() => openUserProfile()}>
+                        <Settings2 />
+						Manage Account
 					</p>
 				</DropdownMenuItem>
 				<DropdownMenuItem asChild>
-					<p onClick={gotoDashboard}>Dashboard</p>
+					<p onClick={gotoDashboard}>
+                        <LayoutDashboardIcon />
+                        Dashboard
+                    </p>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem asChild className={"focus:text-red-700"}>
-					<p onClick={() => signOut()} className="text-red-500">
+					<p onClick={() => signOut()} className="text-red-500 font-semibold">
+                        <LogOut />
 						Sign out
 					</p>
 				</DropdownMenuItem>

@@ -136,4 +136,7 @@
 	.karma-link {
 		@apply cursor-pointer hover:text-blue-700/80 transition duration-200;
 	}
+    .karmagatelogo {
+        @apply dark:fill-white dark:stroke-white fill-black stroke-black dark:hover:fill-red-700 dark:hover:stroke-red-700 hover:fill-red-700 hover:stroke-red-700 transition duration-150;
+    }
 }

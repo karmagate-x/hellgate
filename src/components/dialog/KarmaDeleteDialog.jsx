@@ -9,7 +9,7 @@ import {
 	AlertDialogCancel,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import KarmaLoading from "@/components/karmaLoading";
+import KarmaLoading from "@/components/loading/karmaLoading";
 
 export function KarmaDeleteDialog({
 	open,

@@ -36,7 +36,9 @@ import {
     AlertDialogFooter,
     AlertDialogCancel,
 } from "@/components/ui/alert-dialog"
-import KarmaLoading from "@/components/karmaLoading";
+import { Copy, Check } from "lucide-react";
+import {Button} from "@/components/ui/button";
+import {ApiKeySkeleton} from "@/components/loading/karmaSkeleton";
 
 export function NavUser({
 	user,
@@ -72,7 +74,29 @@ export function NavUser({
         fetchUser();
     }, [getToken]);
 
-	return (
+    function CopyButton({ text }) {
+        const [copied, setCopied] = useState(false);
+
+        const handleCopy = async () => {
+            await navigator.clipboard.writeText(text);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        };
+
+        return (
+            <Button
+                variant="ghost"
+                size="icon"
+                className="h-6 w-6"
+                onClick={handleCopy}
+                title={"Copy Apikey"}
+            >
+                {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+            </Button>
+        );
+    }
+
+    return (
         <>
             <AlertDialog open={openDialog} onOpenChange={setOpenDialog}>
                 <AlertDialogContent>
@@ -82,13 +106,20 @@ export function NavUser({
                             Here’s your personal API key. Keep it safe.
                         </AlertDialogDescription>
                     </AlertDialogHeader>
-                    <div className="rounded bg-muted p-3 font-mono text-xs flex items-center justify-center">
+
+                    <div className="rounded border p-3 font-mono text-xs flex items-center justify-between gap-2">
                         {!karmaGateUser ? (
-                            <KarmaLoading className="dark:fill-white fill-black w-5 h-5" />
+                            <ApiKeySkeleton />
                         ) : (
-                            <p>{karmaGateUser.karmaGateApikey}</p>
+                            <>
+                                <p className="truncate max-w-[180px] sm:max-w-full">
+                                    {karmaGateUser.karmaGateApikey}
+                                </p>
+                                <CopyButton text={karmaGateUser.karmaGateApikey} />
+                            </>
                         )}
                     </div>
+
                     <AlertDialogFooter>
                         <AlertDialogCancel onClick={() => setOpenDialog(false)}>
                             Close
@@ -170,13 +201,15 @@ export function NavUser({
                             <DropdownMenuGroup>
                                 <DropdownMenuItem>
                                     <Settings2 />
-                                    <p variant={"ghost"} onClick={() => openUserProfile()}>
+                                    <p onClick={() => openUserProfile()} className={'w-full'}>
                                         Manage Account
                                     </p>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => setOpenDialog(true)}>
-                                    <Key className="mr-2 h-4 w-4" />
-                                    API Key
+                                    <Key />
+                                    <p className={'w-full'}>
+                                        Your Apikey
+                                    </p>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem>
                                     <CreditCard />
@@ -192,7 +225,7 @@ export function NavUser({
                                 <LogOut />
                                 <p
                                     onClick={() => signOut()}
-                                    className="text-red-500 font-semibold"
+                                    className="text-red-500 font-semibold w-full"
                                 >
                                     Sign out
                                 </p>

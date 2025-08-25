@@ -16,6 +16,7 @@ import ManageShortlinksTab from "@/tab/manageShortlinks";
 import WhitelistedIpsTab from "@/tab/whitelistedIps";
 import BlacklistedIpsTab from "@/tab/blacklistedIps";
 import CoreDashboard from "@/tab/dashboardCore";
+import { AnimatePresence, motion } from "motion/react"
 
 export default function DashboardPageContents() {
 	const { isSignedIn, isLoaded } = useUser();
@@ -52,40 +53,58 @@ export default function DashboardPageContents() {
 	}
 
 	return (
-		<SidebarProvider>
-			<KarmaSidebar />
-			<SidebarInset>
-				<header className="flex justify-between h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
-					<div className="flex items-center gap-2 px-4">
-						<SidebarTrigger className="-ml-1" />
-						<Separator
-							orientation="vertical"
-							className="mr-2 data-[orientation=vertical]:h-4"
-						/>
-						<KarmaBreadcrumb
-							items={[
-								{ label: "Home", href: "/" },
-								{
-									label: "Dashboard",
-									href: "/dashboard",
-									active: !tab || tab === "core",
-								},
-								...(tab && tab !== "core"
-									? [
-											{
-												label: tab
-													.replace(/_/g, " ")
-													.replace(/\b\w/g, (c) => c.toUpperCase()),
-												active: true,
-											},
-									  ]
-									: []),
-							]}
-						/>
-					</div>
-				</header>
-				{renderTabComponent()}
-			</SidebarInset>
-		</SidebarProvider>
+        <motion.div
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            transition={{duration: 0.5, ease: "easeInOut"}}
+        >
+            <SidebarProvider>
+                    <KarmaSidebar />
+                    <SidebarInset>
+                        <header className="flex justify-between h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+                            <div
+                                className="flex items-center gap-2 px-4">
+                                <SidebarTrigger className="-ml-1" />
+                                <Separator
+                                    orientation="vertical"
+                                    className="mr-2 data-[orientation=vertical]:h-4"
+                                />
+                                <KarmaBreadcrumb
+                                    items={[
+                                        { label: "Home", href: "/" },
+                                        {
+                                            label: "Dashboard",
+                                            href: "/dashboard",
+                                            active: !tab || tab === "core",
+                                        },
+                                        ...(tab && tab !== "core"
+                                            ? [
+                                                    {
+                                                        label: tab
+                                                            .replace(/_/g, " ")
+                                                            .replace(/\b\w/g, (c) => c.toUpperCase()),
+                                                        active: true,
+                                                    },
+                                              ]
+                                            : []),
+                                    ]}
+                                />
+                            </div>
+                        </header>
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={tab}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.1, ease: "easeInOut" }}
+                            >
+                                {renderTabComponent(tab)}
+                            </motion.div>
+                        </AnimatePresence>
+                    </SidebarInset>
+            </SidebarProvider>
+        </motion.div>
 	);
 }
