@@ -31,6 +31,7 @@ export async function POST(req) {
             fullName: clerkUser.fullName,
             email: clerkUser.emailAddresses[0]?.emailAddress,
             karmaGateUsername: clerkUser.username,
+            karmaSubscription: "trial",
             karmaGateApikey: generateApiKey(),
             role: "user",
             createdAt: new Date(),

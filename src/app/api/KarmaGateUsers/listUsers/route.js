@@ -8,7 +8,7 @@ const clerkClient = createClerkClient({
 export async function GET(req) {
     const authHeader = req.headers.get("authorization");
     if (!authHeader?.startsWith("Bearer ")) {
-        return new Response("Unauthorized", { status: 401 });
+        return new Response("WTF ARE YOU DOING?", { status: 401 });
     }
 
     const token = authHeader.replace("Bearer ", "").trim();
@@ -34,6 +34,6 @@ export async function GET(req) {
             headers: { "Content-Type": "application/json" },
         });
     } catch {
-        return new Response("Unauthorized", { status: 401 });
+        return new Response("WTF ARE YOU DOING?", { status: 401 });
     }
 }
