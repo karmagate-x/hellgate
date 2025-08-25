@@ -11,6 +11,7 @@ import { useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import KarmaBackupUrlHelpDialog from "@/components/dialog/karmaBackupUrlHelpDialog";
 import KarmaButtonLoading from "@/components/loading/karmaButtonLoading";
+import { KarmaCreateShortlinkCreateYourShortlink } from "@/components/title/KarmaTitle";
 
 export default function CreateShortlinksTab() {
 	const [form, setForm] = useState({
@@ -71,74 +72,79 @@ export default function CreateShortlinksTab() {
 	};
 
 	return (
-		<div className="flex items-center justify-center min-h-[80vh] gap-4 px-2">
-			<form
-				onSubmit={handleSubmit}
-				className="grid md:grid-cols-2 lg:grid-cols-3 gap-2 p-4 border rounded bg-muted/50 w-full"
-			>
-				<FloatingInput
-					id="main-url"
-					label="Main URL"
-					type="url"
-					value={form.firstUrl}
-					onChange={(e) =>
-						setForm((prev) => ({ ...prev, firstUrl: e.target.value }))
-					}
-					required
-				/>
-				<div>
-					<FloatingInput
-						id="backup-url"
-						label="Backup URL"
-						type="url"
-						value={form.secondUrl}
-						onChange={(e) =>
-							setForm((prev) => ({ ...prev, secondUrl: e.target.value }))
-						}
-					/>
-					<KarmaBackupUrlHelpDialog />
-				</div>
-				<FloatingInput
-					id="shortlink-key"
-					label="Shortlink Key"
-					type="text"
-					value={form.shortlinkKey}
-					onChange={(e) =>
-						setForm((prev) => ({ ...prev, shortlinkKey: e.target.value }))
-					}
-					required
-				/>
-				<AllowedDeviceSelect
-					value={form.allowedDevice}
-					onChange={(value) =>
-						setForm((prev) => ({ ...prev, allowedDevice: value }))
-					}
-				/>
-				<AllowedCountrySelect
-					value={form.allowedCountry}
-					onChange={(value) =>
-						setForm((prev) => ({ ...prev, allowedCountry: value }))
-					}
-				/>
-				<BotRedirectionSelect
-					value={form.botRedirection}
-					onChange={(value) =>
-						setForm((prev) => ({ ...prev, botRedirection: value }))
-					}
-				/>
-				<Button
-					variant={"default"}
-					type="submit"
-					className="rounded px-4 py-2 mt-2 flex justify-center"
-					disabled={loading}
-				>
-					{loading ? (
-						<KarmaButtonLoading className={"dark:fill-black fill-white w-8 h-8"} />
-					) : (
-						"Create Shortlink"
-					)}
-				</Button>
-			</form>
-		</div>
+        <div className={'p-4'}>
+            <div className={'mb-10 -mt-2'}>
+                <KarmaCreateShortlinkCreateYourShortlink className="w-42 h-5 sm:h-7" />
+            </div>
+            <div className="flex items-center justify-center">
+                <form
+                    onSubmit={handleSubmit}
+                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-2 p-4 border rounded-xl bg-muted/50 w-full"
+                >
+                    <FloatingInput
+                        id="main-url"
+                        label="Main URL"
+                        type="url"
+                        value={form.firstUrl}
+                        onChange={(e) =>
+                            setForm((prev) => ({ ...prev, firstUrl: e.target.value }))
+                        }
+                        required
+                    />
+                    <div>
+                        <FloatingInput
+                            id="backup-url"
+                            label="Backup URL"
+                            type="url"
+                            value={form.secondUrl}
+                            onChange={(e) =>
+                                setForm((prev) => ({ ...prev, secondUrl: e.target.value }))
+                            }
+                        />
+                        <KarmaBackupUrlHelpDialog />
+                    </div>
+                    <FloatingInput
+                        id="shortlink-key"
+                        label="Shortlink Key"
+                        type="text"
+                        value={form.shortlinkKey}
+                        onChange={(e) =>
+                            setForm((prev) => ({ ...prev, shortlinkKey: e.target.value }))
+                        }
+                        required
+                    />
+                    <AllowedDeviceSelect
+                        value={form.allowedDevice}
+                        onChange={(value) =>
+                            setForm((prev) => ({ ...prev, allowedDevice: value }))
+                        }
+                    />
+                    <AllowedCountrySelect
+                        value={form.allowedCountry}
+                        onChange={(value) =>
+                            setForm((prev) => ({ ...prev, allowedCountry: value }))
+                        }
+                    />
+                    <BotRedirectionSelect
+                        value={form.botRedirection}
+                        onChange={(value) =>
+                            setForm((prev) => ({ ...prev, botRedirection: value }))
+                        }
+                    />
+                    <Button
+                        variant={"default"}
+                        type="submit"
+                        className="rounded px-4 py-2 mt-2 flex justify-center"
+                        disabled={loading}
+                    >
+                        {loading ? (
+                            <KarmaButtonLoading className={"dark:fill-black fill-white w-8 h-8"} />
+                        ) : (
+                            "Create Shortlink"
+                        )}
+                    </Button>
+                </form>
+            </div>
+        </div>
 	);
 }

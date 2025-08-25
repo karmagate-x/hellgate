@@ -225,7 +225,7 @@ export function NavUser({
                                 <LogOut />
                                 <p
                                     onClick={() => signOut()}
-                                    className="text-red-500 font-semibold w-full"
+                                    className="text-red-800 font-semibold w-full"
                                 >
                                     Sign out
                                 </p>

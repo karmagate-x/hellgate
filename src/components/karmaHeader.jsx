@@ -21,7 +21,7 @@ export default function KarmaHeader() {
                 className="text-xl font-bold tracking-wider cursor-pointer"
                 onClick={gotoHome}
             >
-                <KarmaGate className="w-32 sm:w-42" />
+                <KarmaGate className="w-32 h-5 sm:w-42 sm:h-7" />
             </div>
 
             <nav>

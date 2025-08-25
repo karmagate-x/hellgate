@@ -7,30 +7,35 @@ import {
 	CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import {
-	SidebarGroup,
-	SidebarGroupLabel,
-	SidebarMenu,
-	SidebarMenuButton,
-	SidebarMenuItem,
-	SidebarMenuSub,
-	SidebarMenuSubButton,
-	SidebarMenuSubItem,
+    SidebarFooter,
+    SidebarGroup,
+    SidebarGroupLabel,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+    SidebarMenuSub,
+    SidebarMenuSubButton,
+    SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { useRouter } from "next/navigation";
+import {KarmaThemeToggler} from "@/components/ui/KarmaThemToggler";
 
 export function NavMain({ items }) {
 	const router = useRouter();
 	return (
 		<SidebarGroup>
-			<SidebarGroupLabel>
-				<h1
-					onClick={() => router.push("/dashboard?tab=core")}
-					className={
-						"text-red-700 animate-pulse font-semibold text-sm mb-2 cursor-pointer"
-					}
-				>
-					{process.env.NEXT_PUBLIC_ORG}
-				</h1>
+			<SidebarGroupLabel className={'mb-5'}>
+                <div className={'flex justify-between items-center w-full border rounded px-5'}>
+                    <h1
+                        onClick={() => router.push("/dashboard?tab=core")}
+                        className={
+                            "text-red-800 animate-pulse font-semibold text-sm cursor-pointer"
+                        }
+                    >
+                        {process.env.NEXT_PUBLIC_ORG}
+                    </h1>
+                    <KarmaThemeToggler/>
+                </div>
 			</SidebarGroupLabel>
 			<SidebarMenu>
 				{items.map((item) => (
@@ -49,7 +54,7 @@ export function NavMain({ items }) {
 												item.icon?.displayName.toLowerCase() === "link"
 													? "text-blue-600"
 													: item.icon?.displayName.toLowerCase() === "bot"
-													? "text-red-600"
+													? "text-red-700"
 													: item.icon?.displayName.toLowerCase() === "activity"
 													? "text-amber-600"
 													: "text-cyan-600"

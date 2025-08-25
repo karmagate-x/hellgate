@@ -55,7 +55,7 @@ export function ChartData() {
 		<Card className="py-0 h-full">
 			<CardHeader className="flex flex-col items-stretch border-b !p-0 sm:flex-row">
 				<div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-4 pb-3 sm:!py-0">
-					<CardTitle className={"text-red-700"}>
+					<CardTitle className={"text-red-800"}>
 						{process.env.NEXT_PUBLIC_ORG}
 					</CardTitle>
 					<CardDescription>
@@ -69,7 +69,7 @@ export function ChartData() {
 							<button
 								key={chart}
 								data-active={activeChart === chart}
-								className={`data-[active=true]:bg-red-700 relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l sm:border-t-0 sm:border-l sm:px-8 sm:py-6${
+								className={`data-[active=true]:bg-red-800 relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l sm:border-t-0 sm:border-l sm:px-8 sm:py-6${
 									chart === "mobile" && activeChart === "mobile"
 										? " rounded-tr-xl"
 										: ""

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import KarmaManageShortlinksContent from "@/components/shortlinks/karmaManageShortlinksContent";
 import {ManageShortlinkSkeleton} from "@/components/loading/karmaSkeleton";
+import {useRouter} from "next/navigation";
+import {KarmaManageShortlinksNoShortlinksYet, KarmaManageShortlinksYourShortlinks} from "@/components/title/KarmaTitle";
 
 export default function ManageShortlinksTab() {
     const [shortlinks, setShortlinks] = useState([]);
@@ -15,6 +17,7 @@ export default function ManageShortlinksTab() {
     const [deleteData, setDeleteData] = useState(null);
     const { user } = useUser();
     const [skeletonCount, setSkeletonCount] = useState(4);
+    const router = useRouter();
 
     const fetchShortlinks = () => {
         if (!user || !user.username) return;
@@ -37,18 +40,24 @@ export default function ManageShortlinksTab() {
         fetchShortlinks();
     }, [user]);
 
+    const createShortlink = () => {
+        router.push("/dashboard?tab=create_shortlinks");
+    }
+
     return (
         <div className="p-4">
-            <h2 className="text-xl font-bold mb-4">Your Shortlinks</h2>
-
             {loading ? (
                 <ManageShortlinkSkeleton count={skeletonCount} />
             ) : shortlinks.length === 0 ? (
-                <div className="flex items-center justify-center min-h-[50vh] text-muted-foreground">
-                    No shortlinks found.
+                <div className="flex flex-col gap-1 items-center justify-center text-center min-h-[70vh] text-muted-foreground">
+                    <KarmaManageShortlinksNoShortlinksYet className="w-42 h-5 sm:w-62 sm:h-7" />
+                    <p className={'ml-7 sm:ml-13 sm:text-base text-sm'}>Create your first shorlink <span onClick={createShortlink} className="cursor-pointer relative font-bold text-red-800 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[1.5px] after:bg-red-800 after:transition-all after:duration-300 hover:after:w-full">Here</span></p>
                 </div>
             ) : (
                 <div className="grid gap-4">
+                    <div className={'mb-6 -mt-2'}>
+                        <KarmaManageShortlinksYourShortlinks className="w-42 h-5 sm:h-7" />
+                    </div>
                     {shortlinks.map((link) => (
                         <div
                             key={link._id}
@@ -70,7 +79,7 @@ export default function ManageShortlinksTab() {
                                     <span
                                         className={`${
                                             link.secondUrl === ""
-                                                ? "text-red-700 font-semibold"
+                                                ? "text-red-800 font-semibold"
                                                 : "text-green-700 font-semibold"
                                         }`}
                                     >

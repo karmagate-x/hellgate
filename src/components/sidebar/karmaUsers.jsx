@@ -81,8 +81,8 @@ export default function KarmaUsersAvatar() {
                     </p>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem asChild className={"focus:text-red-700"}>
-					<p onClick={() => signOut()} className="text-red-500 font-semibold">
+				<DropdownMenuItem asChild className={"focus:text-red-900"}>
+					<p onClick={() => signOut()} className="text-red-800 font-semibold">
                         <LogOut />
 						Sign out
 					</p>

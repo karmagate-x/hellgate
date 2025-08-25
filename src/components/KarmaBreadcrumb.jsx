@@ -16,7 +16,7 @@ export default function KarmaBreadcrumb({ items }) {
 	};
 
 	return (
-		<div className="p-5">
+		<div className="p-5 hidden sm:flex">
 			<Breadcrumb>
 				<BreadcrumbList>
 					{items.map((item, idx) => (
@@ -25,8 +25,8 @@ export default function KarmaBreadcrumb({ items }) {
 								<BreadcrumbLink asChild>
 									<p
 										onClick={item.href ? () => goTo(item.href) : undefined}
-										className={`cursor-pointer ${
-											item.active ? "font-semibold text-red-700/80" : ""
+										className={`cursor-pointer text-xs sm:text-sm ${
+											item.active ? "font-semibold text-red-800" : ""
 										}`}
 									>
 										{item.label}
